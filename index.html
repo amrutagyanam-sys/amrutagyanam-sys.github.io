@@ -1,1 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Amrutha Gyanam – Data Governance & Data Security Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="Portfolio of Amrutha Gyanam – Data Governance and Data Security professional focused on metadata management, IAM, cloud data security, audit readiness, compliance reporting, and cybersecurity research."
+  />
+
+  <style>
+    :root {
+      --dark-bg: #020617;
+      --dark-accent: #0b1220;
+      --primary: #3b82f6;
+      --primary-2: #0ea5e9;
+      --primary-soft: rgba(59, 130, 246, 0.14);
+      --success-soft: rgba(34, 197, 94, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: rgba(148, 163, 184, 0.35);
+      --card-bg: #111827;
+      --card-bg-2: #020617;
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.16), transparent 34rem),
+        radial-gradient(circle at bottom right, rgba(14, 165, 233, 0.10), transparent 34rem),
+        var(--dark-bg);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    header {
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.9) 0, rgba(2, 6, 23, 0.98) 48%, #000 100%);
+      color: var(--text-main);
+      padding: 1.25rem 1.25rem 3.4rem;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.12) 0, transparent 55%),
+        radial-gradient(circle at 80% 0%, rgba(37, 99, 235, 0.18) 0, transparent 55%),
+        radial-gradient(circle at 50% 120%, rgba(34, 197, 94, 0.10) 0, transparent 60%);
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto 1.6rem;
+      padding: 0 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      gap: 1rem;
+    }
+
+    .nav-logo {
+      font-weight: 750;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .nav-logo span.symbol {
+      width: 30px;
+      height: 30px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #22c55e, #0ea5e9);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      color: #020617;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.6rem;
+      font-size: 0.86rem;
+      color: #cbd5f5;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 0.28rem 0.7rem;
+      border-radius: var(--radius-pill);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.28);
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(59, 130, 246, 0.24);
+      border-color: rgba(147, 197, 253, 0.55);
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.25fr);
+      gap: 2.4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      color: #bfdbfe;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 4vw, 3.15rem);
+      line-height: 1.05;
+      font-weight: 800;
+      margin-bottom: 0.9rem;
+      color: #f8fafc;
+    }
+
+    .hero-title span {
+      display: block;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      color: #cbd5f5;
+      font-weight: 600;
+      margin-top: 0.65rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: #dbeafe;
+      max-width: 40rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .hero-chip-row,
+    .pill-row,
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .hero-chip-row {
+      margin-bottom: 1.4rem;
+    }
+
+    .chip,
+    .pill,
+    .skill-tag,
+    .hero-card-tag {
+      padding: 0.24rem 0.75rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.48);
+      font-size: 0.75rem;
+      color: #dbeafe;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-link {
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn-primary {
+      padding: 0.62rem 1.25rem;
+      background: linear-gradient(135deg, #2563eb, #0ea5e9);
+      color: white;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-secondary {
+      padding: 0.58rem 1.15rem;
+      border: 1px solid rgba(191, 219, 254, 0.7);
+      background: rgba(15, 23, 42, 0.15);
+      color: #e5e7eb;
+    }
+
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .btn-link:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero-note {
+      font-size: 0.82rem;
+      color: #bfdbfe;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(37, 99, 235, 0.22) 0, rgba(15, 23, 42, 0.98) 52%);
+      border-radius: 1.5rem;
+      padding: 1.45rem;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 110% -10%, rgba(52, 211, 153, 0.25) 0, transparent 52%);
+      opacity: 0.62;
+      pointer-events: none;
+    }
+
+    .hero-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-card-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #93c5fd;
+      margin-bottom: 0.45rem;
+      font-weight: 800;
+    }
+
+    .hero-card-main {
+      font-size: 1.12rem;
+      font-weight: 750;
+      margin-bottom: 0.65rem;
+    }
+
+    .hero-card-body {
+      font-size: 0.86rem;
+      color: #cbd5f5;
+      margin-bottom: 0.85rem;
+    }
+
+    main section {
+      margin-bottom: 2.9rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.35rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.22rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .section-title span.dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
+    .section-subtitle {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      max-width: 38rem;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 1.25rem;
+    }
+
+    .card,
+    .project-card,
+    .artifact,
+    .skill-card,
+    .contact-card,
+    .case-study-card {
+      background: rgba(17, 24, 39, 0.92);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.42);
+    }
+
+    .card,
+    .contact-card,
+    .case-study-card {
+      padding: 1.25rem 1.35rem;
+    }
+
+    .chip-soft {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.72rem;
+      border-radius: var(--radius-pill);
+      background: rgba(59, 130, 246, 0.15);
+      color: #dbeafe;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      display: inline-block;
+      margin-bottom: 0.65rem;
+      font-weight: 700;
+    }
+
+    .card h3,
+    .case-study-card h3,
+    .project-card h3,
+    .contact-card h3 {
+      font-size: 1.02rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .card p,
+    .project-card p,
+    .contact-card p,
+    .case-study-card p {
+      font-size: 0.88rem;
+      color: #d1d5db;
+      margin-bottom: 0.55rem;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.12rem;
+      font-size: 0.86rem;
+      color: #cbd5f5;
+    }
+
+    li + li {
+      margin-top: 0.25rem;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 1rem;
+    }
+
+    .project-card {
+      background: rgba(2, 6, 23, 0.88);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 258px;
+    }
+
+    .project-card p {
+      flex: 1;
+    }
+
+    .btn-link {
+      width: fit-content;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      padding: 0.36rem 0.86rem;
+      border: 1px solid rgba(96, 165, 250, 0.75);
+      color: #dbeafe;
+      background: rgba(37, 99, 235, 0.16);
+    }
+
+    .disclaimer {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.28);
+      color: #d1fae5;
+      font-size: 0.84rem;
+    }
+
+    .case-study-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+
+    .case-study-card {
+      background: rgba(2, 6, 23, 0.84);
+    }
+
+    .case-meta {
+      font-size: 0.78rem;
+      color: #93c5fd;
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+
+    .case-study-card h4 {
+      font-size: 0.9rem;
+      color: #f8fafc;
+      margin: 0.85rem 0 0.25rem;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.6rem;
+      font-size: 0.78rem;
+      color: #d1d5db;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      padding: 0.48rem 0.55rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .mini-table th {
+      background: rgba(59, 130, 246, 0.16);
+      color: #dbeafe;
+      font-weight: 750;
+    }
+
+    .artifact-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .artifact {
+      background: rgba(2, 6, 23, 0.88);
+      padding: 0.95rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.8rem;
+    }
+
+    .artifact-main {
+      font-size: 0.9rem;
+      font-weight: 750;
+      color: #f8fafc;
+    }
+
+    .artifact-sub {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin-top: 0.18rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .skill-card {
+      background: rgba(2, 6, 23, 0.88);
+      padding: 0.85rem 0.9rem;
+      font-size: 0.82rem;
+    }
+
+    .skill-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+      color: #e5e7eb;
+    }
+
+    .skill-card p {
+      font-size: 0.8rem;
+      color: #d1d5db;
+    }
+
+    .skill-tags {
+      margin-top: 0.45rem;
+    }
+
+    .skill-tag {
+      padding: 0.16rem 0.55rem;
+      background: rgba(59, 130, 246, 0.2);
+      color: #e5e7ff;
+      font-size: 0.72rem;
+      border-color: rgba(129, 140, 248, 0.6);
+    }
+
+    .contact-card {
+      background: rgba(2, 6, 23, 0.92);
+    }
+
+    .contact-row {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-top: 0.32rem;
+    }
+
+    .contact-row span.label {
+      color: #9ca3af;
+      display: inline-block;
+      width: 82px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+    }
+
+    .contact-pill {
+      padding: 0.34rem 0.78rem;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(15, 23, 42, 0.55);
+    }
+
+    .about-photo-wrapper {
+      margin-top: 1.5rem;
+      text-align: center;
+    }
+
+    .about-photo-frame {
+      width: 242px;
+      height: 242px;
+      margin: 0 auto;
+      background: radial-gradient(circle at top, rgba(59, 130, 246, 0.35), rgba(15, 23, 42, 1));
+      padding: 10px;
+      border-radius: 40px;
+      transform: rotate(5deg);
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .about-photo-frame:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 28px 60px rgba(37, 99, 235, 0.7);
+      border-color: rgba(96, 165, 250, 0.95);
+    }
+
+    .about-photo-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      object-fit: cover;
+      transform: rotate(-5deg);
+    }
+
+    .about-photo-caption {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      color: #d1d5db;
+      line-height: 1.4;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #9ca3af;
+      padding: 0 1.25rem 1.75rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-two {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .artifact {
+        flex-direction: column;
+      }
+
+      .about-photo-frame {
+        width: 210px;
+        height: 210px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="nav">
+      <div class="nav-logo">
+        <span class="symbol">AG</span>
+        <span>Professional Portfolio</span>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#case-studies">Case Studies</a>
+        <a href="#artifacts">Artifacts</a>
+        <a href="#airtag">AirTag Study</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Data Governance · Data Security · IAM/GRC</div>
+        <h1 class="hero-title">
+          Amrutha Gyanam
+          <span>Data Governance & Data Security Analyst</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Portfolio focused on metadata management, sensitive data classification, access governance,
+          cloud data security, audit readiness, compliance reporting, and privacy-centered cybersecurity research.
+        </p>
+
+        <div class="hero-chip-row">
+          <span class="chip">Data Governance</span>
+          <span class="chip">Data Security</span>
+          <span class="chip">IAM & Access Governance</span>
+          <span class="chip">Cloud Data Security</span>
+          <span class="chip">Compliance Analytics</span>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn-primary" href="#case-studies">View Case Studies</a>
+          <a class="btn-secondary" href="#artifacts">View Artifacts</a>
+          <a class="btn-secondary" href="./Amrutha_Gyanam_Resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        </div>
+
+        <p class="hero-note">
+          Dallas, TX · Open to data governance, data security, IAM/GRC, and cloud governance roles.
+        </p>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-title">Portfolio Focus</div>
+        <div class="hero-card-main">Governance, Security & Responsible Technology</div>
+        <div class="hero-card-body">
+          This portfolio shows how metadata, access, classification, lineage, data quality,
+          remediation, and audit evidence can be turned into practical governance and security outcomes.
+        </div>
+        <div class="hero-chip-row">
+          <span class="hero-card-tag">Metadata & Lineage</span>
+          <span class="hero-card-tag">Access Reviews</span>
+          <span class="hero-card-tag">DQ Scorecards</span>
+          <span class="hero-card-tag">Audit Evidence</span>
+          <span class="hero-card-tag">Privacy Risk</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrapper">
+    <section id="about">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>About Me</span>
+        </div>
+        <p class="section-subtitle">
+          Data governance and data security professional with a cybersecurity foundation.
+        </p>
+      </div>
+
+      <div class="grid-two">
+        <div class="card">
+          <span class="chip-soft">Profile</span>
+          <h3>Data Governance & Data Security Focus</h3>
+          <p>
+            I focus on metadata management, business glossaries, data dictionaries, CDE tracking,
+            sensitive data classification, access governance, lineage validation, cloud data security,
+            audit readiness, and compliance reporting.
+          </p>
+          <p>
+            My work connects governance and security signals such as ownership records, classification coverage,
+            access review status, remediation SLAs, data quality indicators, and audit findings into dashboards,
+            trackers, evidence packs, and executive-ready summaries.
+          </p>
+
+          <h4 style="margin-top:1rem; font-size:0.95rem;">Certifications</h4>
+          <ul>
+            <li><strong>CompTIA Security+ (SY0-701)</strong></li>
+            <li><strong>AWS Certified Solutions Architect – Associate</strong></li>
+            <li><strong>Microsoft Azure Fundamentals (AZ-900)</strong></li>
+            <li><strong>Certified Data Management Professional (CDMP)</strong> – In Progress</li>
+            <li><strong>(ISC)² Cybersecurity Candidate</strong></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="chip-soft">Core Strengths</span>
+          <h3>What I Bring</h3>
+          <ul>
+            <li>Translate metadata, access, classification, DQ, and remediation data into clear governance reporting.</li>
+            <li>Support audit readiness through evidence packs, SOPs, runbooks, control narratives, and trackers.</li>
+            <li>Analyze stale access, excessive permissions, public exposure, and least-privilege gaps.</li>
+            <li>Build Power BI and Excel dashboards for compliance, data quality, access reviews, and remediation status.</li>
+            <li>Connect cybersecurity research with privacy, user safety, IoT misuse, and responsible technology governance.</li>
+          </ul>
+
+          <div class="pill-row">
+            <span class="pill">DAMA-DMBOK</span>
+            <span class="pill">Metadata</span>
+            <span class="pill">CDEs</span>
+            <span class="pill">IAM</span>
+            <span class="pill">Audit Evidence</span>
+            <span class="pill">Power BI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-photo-wrapper">
+        <div class="about-photo-frame">
+          <img src="amrutha_cropped.jpg" alt="Amrutha Gyanam" class="about-photo-img" />
+        </div>
+        <p class="about-photo-caption">
+          Building a career around data trust, access accountability,<br />
+          cloud security awareness, and responsible technology use.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>Portfolio Projects</span>
+        </div>
+        <p class="section-subtitle">
+          Project themes aligned with my resume and target roles.
+        </p>
+      </div>
+
+      <div class="project-grid">
+        <div class="project-card">
+          <span class="chip-soft">Data Governance Case Study</span>
+          <h3>Enterprise Data Governance & Cloud Data Security</h3>
+          <p>
+            Governance and data security work across cloud and analytical environments, including metadata,
+            sensitive data classification, IAM/S3 access review, lineage validation, remediation tracking,
+            and audit evidence preparation.
+          </p>
+          <div class="pill-row">
+            <span class="pill">AWS IAM</span>
+            <span class="pill">S3</span>
+            <span class="pill">Purview</span>
+            <span class="pill">Collibra</span>
+          </div>
+          <a class="btn-link" href="#enterprise-governance">View Case Study</a>
+        </div>
+
+        <div class="project-card">
+          <span class="chip-soft">Data Security Case Study</span>
+          <h3>Retail Data Security & Access Analytics</h3>
+          <p>
+            Data security and governance reporting across retail datasets using metadata, lineage, access activity,
+            DQ indicators, and dashboards for access trends, operational exceptions, and remediation progress.
+          </p>
+          <div class="pill-row">
+            <span class="pill">SQL</span>
+            <span class="pill">Python</span>
+            <span class="pill">Tableau</span>
+            <span class="pill">BigQuery</span>
+          </div>
+          <a class="btn-link" href="#retail-security">View Case Study</a>
+        </div>
+
+        <div class="project-card">
+          <span class="chip-soft">Compliance Analytics Case Study</span>
+          <h3>BI Modernization & Governance Reporting</h3>
+          <p>
+            Migration of Excel-based reporting into governed Power BI dashboards with Snowflake, Azure Data Factory,
+            SQL validation checks, ServiceNow reporting, and audit-ready documentation.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Power BI</span>
+            <span class="pill">Snowflake</span>
+            <span class="pill">ADF</span>
+            <span class="pill">ServiceNow</span>
+          </div>
+          <a class="btn-link" href="#bi-governance">View Case Study</a>
+        </div>
+
+        <div class="project-card">
+          <span class="chip-soft">ETL Governance Case Study</span>
+          <h3>Healthcare Reporting Governance & ETL Validation</h3>
+          <p>
+            Regulated reporting support through BRDs, data dictionaries, validation rules, source-to-report mappings,
+            SSIS ETL validation, SQL checks, UAT evidence, and audit-support documentation.
+          </p>
+          <div class="pill-row">
+            <span class="pill">SSIS</span>
+            <span class="pill">SSRS</span>
+            <span class="pill">SQL Server</span>
+            <span class="pill">Visio</span>
+          </div>
+          <a class="btn-link" href="#healthcare-reporting">View Case Study</a>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>Portfolio note:</strong> Project examples and downloadable templates use synthetic examples,
+        recreated artifacts, and public/academic research. No employer, client, customer, internal ticket,
+        confidential dashboard, or proprietary data is included.
+      </div>
+    </section>
+
+    <section id="case-studies">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>End-to-End Case Studies</span>
+        </div>
+        <p class="section-subtitle">
+          Expanded project explanations showing business problem, workflow, deliverables, and outcomes.
+        </p>
+      </div>
+
+      <div class="case-study-grid">
+        <article class="case-study-card" id="enterprise-governance">
+          <span class="chip-soft">Case Study 1</span>
+          <h3>Enterprise Data Governance & Cloud Data Security</h3>
+          <div class="case-meta">Focus: Metadata · Sensitive Data Classification · IAM/S3 Review · DSPM · Audit Readiness</div>
+
+          <h4>Business Problem</h4>
+          <p>
+            Sensitive financial services data can exist across cloud storage, databases, analytics platforms,
+            catalog records, and reporting datasets. Governance and security teams need clear visibility into
+            ownership, classification, access risk, scan health, remediation status, and audit evidence.
+          </p>
+
+          <h4>Workflow</h4>
+          <ol>
+            <li>Identify governed data assets such as S3 buckets, Snowflake schemas, RDS databases, reporting datasets, and catalog records.</li>
+            <li>Maintain ownership, stewardship, business metadata, glossary terms, classification tags, lineage references, and control status.</li>
+            <li>Review sensitive data classification results for PII, PCI, SSN, customer/account data, and confidential business data.</li>
+            <li>Validate DSPM-style scan coverage, failed scans, metadata gaps, classification issues, and data onboarding status.</li>
+            <li>Review AWS IAM roles, IAM policies, S3 bucket policies, ACLs, public access settings, cross-account permissions, and CloudTrail evidence.</li>
+            <li>Build Power BI dashboards and Excel trackers for metadata completeness, classification coverage, access review progress, remediation SLAs, scan health, audit findings, and control status.</li>
+            <li>Prepare evidence packages, SOPs, runbooks, remediation summaries, and weekly status reports.</li>
+          </ol>
+
+          <h4>Sample Risk Review Matrix</h4>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Risk Area</th>
+                <th>Example Check</th>
+                <th>Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Classification</td>
+                <td>PII/PCI labels missing or inconsistent</td>
+                <td>Classification remediation tracker</td>
+              </tr>
+              <tr>
+                <td>Access</td>
+                <td>Broad S3 access or stale IAM role</td>
+                <td>Access finding and owner follow-up</td>
+              </tr>
+              <tr>
+                <td>Audit Readiness</td>
+                <td>Missing evidence or control status</td>
+                <td>Evidence package and status dashboard</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Deliverables</h4>
+          <p>
+            Governance asset inventory, classification review tracker, access review findings, remediation dashboard,
+            audit evidence package, SOPs, control narratives, and weekly status reporting.
+          </p>
+        </article>
+
+        <article class="case-study-card" id="retail-security">
+          <span class="chip-soft">Case Study 2</span>
+          <h3>Retail Data Security & Access Analytics</h3>
+          <div class="case-meta">Focus: Access Analytics · Metadata · Lineage · DQ Dashboards · Controlled Reporting</div>
+
+          <h4>Business Problem</h4>
+          <p>
+            Retail teams need analytics across inventory, sales, supply chain, and operations, but raw access must be
+            controlled. Governance teams need visibility into metadata, lineage, access activity, data quality,
+            and remediation progress.
+          </p>
+
+          <h4>Workflow</h4>
+          <ol>
+            <li>Document metadata, glossary terms, data dictionaries, ownership mapping, and lineage references for governed analytics assets.</li>
+            <li>Classify sensitive data and document access requirements with InfoSec, analytics, and engineering teams.</li>
+            <li>Analyze user access logs, login activity, access roles, system interactions, and failed login patterns.</li>
+            <li>Use SQL, Python/Pandas, Excel, Tableau, and Power BI to create access and compliance reporting.</li>
+            <li>Integrate AWS Glue and BigQuery lineage or metadata outputs into governance tracking workflows.</li>
+            <li>Create dashboards for DQ indicators, access trends, compliance status, forecast accuracy, operational exceptions, and remediation progress.</li>
+            <li>Track governance defects, data quality issues, metadata gaps, and remediation actions through Jira or ServiceNow-aligned workflows.</li>
+          </ol>
+
+          <h4>Sample Dashboard Metrics</h4>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Purpose</th>
+                <th>Stakeholder</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Failed Login Trend</td>
+                <td>Identify unusual access patterns</td>
+                <td>Security / Access Governance</td>
+              </tr>
+              <tr>
+                <td>DQ Exception Count</td>
+                <td>Track quality issues in reporting data</td>
+                <td>Analytics / Business Owners</td>
+              </tr>
+              <tr>
+                <td>Metadata Gap Status</td>
+                <td>Track missing ownership or lineage</td>
+                <td>Data Governance</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Deliverables</h4>
+          <p>
+            Data dictionary updates, access analysis reports, Tableau/Power BI dashboards, lineage documentation,
+            DQ scorecards, remediation playbooks, and issue tracking summaries.
+          </p>
+        </article>
+
+        <article class="case-study-card" id="bi-governance">
+          <span class="chip-soft">Case Study 3</span>
+          <h3>BI Modernization & Governance Reporting</h3>
+          <div class="case-meta">Focus: Power BI · Snowflake · ADF · SQL Validation · ServiceNow Reporting</div>
+
+          <h4>Business Problem</h4>
+          <p>
+            Manual Excel reporting can create inconsistent metrics, unclear ownership, weak validation,
+            repeated manual effort, and limited audit traceability. Business, risk, operations, and compliance teams
+            need governed dashboards with documented logic and reliable refresh cycles.
+          </p>
+
+          <h4>Workflow</h4>
+          <ol>
+            <li>Gather reporting requirements from business, risk, operations, and compliance stakeholders.</li>
+            <li>Translate requirements into BRDs, business rules, dashboard specifications, and validation requirements.</li>
+            <li>Review existing Excel reports to understand data sources, calculations, manual steps, owners, and validation gaps.</li>
+            <li>Support Snowflake, Power BI, Azure SQL, and Azure Data Factory reporting workflows.</li>
+            <li>Migrate 20+ Excel-based reports into governed Power BI dashboards.</li>
+            <li>Create SQL validation and reconciliation checks for data accuracy, transformation logic, and source-to-report consistency.</li>
+            <li>Document data dictionaries, source-to-report mappings, access requirements, SOPs, and validation procedures.</li>
+            <li>Integrate ServiceNow data into Power BI dashboards for compliance workflow and remediation visibility.</li>
+          </ol>
+
+          <h4>Sample Source-to-Report Mapping</h4>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Transformation</th>
+                <th>Report Output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Snowflake finance table</td>
+                <td>SQL validation and KPI logic</td>
+                <td>Power BI risk dashboard</td>
+              </tr>
+              <tr>
+                <td>ServiceNow issue data</td>
+                <td>Status and SLA grouping</td>
+                <td>Remediation dashboard</td>
+              </tr>
+              <tr>
+                <td>Excel legacy report</td>
+                <td>Metric cleanup and mapping</td>
+                <td>Governed Power BI report</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Deliverables</h4>
+          <p>
+            BRDs, dashboard specifications, business rules, SQL validation checks, Power BI dashboards,
+            data dictionaries, source-to-report mappings, SOPs, and audit-ready reporting documentation.
+          </p>
+        </article>
+
+        <article class="case-study-card" id="healthcare-reporting">
+          <span class="chip-soft">Case Study 4</span>
+          <h3>Healthcare Reporting Governance & ETL Validation</h3>
+          <div class="case-meta">Focus: Business Analysis · SSIS · SQL Server · SSRS · UAT · Audit Support</div>
+
+          <h4>Business Problem</h4>
+          <p>
+            Healthcare and life sciences reporting workflows require accurate source data, validated transformation logic,
+            clear process documentation, UAT evidence, and audit-support artifacts. Data from Excel, CSV, Oracle,
+            and SQL Server must be moved into reporting structures with controlled validation.
+          </p>
+
+          <h4>Workflow</h4>
+          <ol>
+            <li>Gather business and technical requirements from business users, IT teams, and reporting stakeholders.</li>
+            <li>Create BRDs, workflow diagrams, process flows, and reporting documentation.</li>
+            <li>Validate source data across Excel, CSV, Oracle, and SQL Server sources.</li>
+            <li>Design and validate SSIS ETL workflows to move and reconcile operational data into SQL Server reporting structures.</li>
+            <li>Develop SQL queries, stored procedures, validation checks, snapshots, and materialized views.</li>
+            <li>Build SSRS and Power BI reports for operational KPIs, supply chain visibility, DQ trends, reporting exceptions, and process performance.</li>
+            <li>Perform profiling, cleansing, gap analysis, UAT support, issue tracking, and audit-support documentation.</li>
+          </ol>
+
+          <h4>Sample Validation Checklist</h4>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Validation Area</th>
+                <th>Check</th>
+                <th>Evidence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Completeness</td>
+                <td>Source and target row counts match</td>
+                <td>ETL validation log</td>
+              </tr>
+              <tr>
+                <td>Accuracy</td>
+                <td>Key report fields match source values</td>
+                <td>SQL validation output</td>
+              </tr>
+              <tr>
+                <td>UAT</td>
+                <td>User confirms report logic and output</td>
+                <td>UAT signoff notes</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>Deliverables</h4>
+          <p>
+            BRDs, process flows, SSIS validation outputs, SQL checks, SSRS/Power BI reports, data dictionaries,
+            source-to-report mappings, UAT notes, training materials, and audit-support documentation.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="artifacts">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>Portfolio Artifacts</span>
+        </div>
+        <p class="section-subtitle">
+          Templates and examples that demonstrate governance, security, reporting, and audit-readiness thinking.
+        </p>
+      </div>
+
+      <div class="artifact-list">
+        <div class="artifact">
+          <div>
+            <div class="artifact-main">Apple AirTag Misuse – Academic Research Brief</div>
+            <div class="artifact-sub">Research brief covering IoT tracking misuse, privacy risk, cyberstalking, and mitigation recommendations.</div>
+          </div>
+          <a class="btn-link" href="./Research Brief.pdf" target="_blank" rel="noopener">Download PDF</a>
+        </div>
+
+        <div class="artifact">
+          <div>
+            <div class="artifact-main">Data Governance Framework Template</div>
+            <div class="artifact-sub">Mock template for glossary, data dictionary, CDEs, ownership, lineage, and DQ controls.</div>
+          </div>
+          <a class="btn-link" href="./artifacts/data-governance-framework-template.pdf" target="_blank" rel="noopener">View Template</a>
+        </div>
+
+        <div class="artifact">
+          <div>
+            <div class="artifact-main">IAM & S3 Access Review Tracker</div>
+            <div class="artifact-sub">Synthetic tracker for access findings, stale access, public exposure, owner follow-up, and closure evidence.</div>
+          </div>
+          <a class="btn-link" href="./artifacts/iam-s3-access-review-tracker.pdf" target="_blank" rel="noopener">View Tracker</a>
+        </div>
+
+        <div class="artifact">
+          <div>
+            <div class="artifact-main">Audit Readiness & Remediation SLA Dashboard</div>
+            <div class="artifact-sub">Mock dashboard concept for control status, remediation SLAs, evidence gaps, and audit findings.</div>
+          </div>
+          <a class="btn-link" href="./artifacts/audit-remediation-dashboard.pdf" target="_blank" rel="noopener">View Dashboard</a>
+        </div>
+
+        <div class="artifact">
+          <div>
+            <div class="artifact-main">Sensitive Data Classification Matrix</div>
+            <div class="artifact-sub">Synthetic matrix for PII/PHI/PCI/SSN classification, risk rating, masking, access controls, and remediation.</div>
+          </div>
+          <a class="btn-link" href="./artifacts/sensitive-data-classification-matrix.pdf" target="_blank" rel="noopener">View Matrix</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="airtag">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>Academic Research Project: AirTag Misuse Analysis</span>
+        </div>
+        <p class="section-subtitle">
+          Academic cybersecurity research on privacy risk, IoT misuse, and digital safety.
+        </p>
+      </div>
+
+      <div class="grid-two">
+        <div class="card">
+          <span class="chip-soft">Research Focus</span>
+          <h3>Tracking or Stalking?</h3>
+          <p>
+            This academic research project examines Apple AirTags as a dual-use IoT tracking technology.
+            The study analyzes how Bluetooth-based consumer trackers can be misused for cyberstalking,
+            vehicle tracking, coercive control, and unauthorized surveillance.
+          </p>
+          <p>
+            The research combines academic cyberstalking literature, public case reports, technical analysis
+            of Bluetooth/crowdsourced tracking systems, and victim-safety guidance to identify privacy,
+            design, reporting, and governance gaps.
+          </p>
+          <ul>
+            <li>Bluetooth LE, U1, and Find My network behavior.</li>
+            <li>Cyberstalking and unauthorized tracking misuse scenarios.</li>
+            <li>Anti-stalking alert gaps across iOS and Android users.</li>
+            <li>Privacy, consent, safety, and governance recommendations.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="chip-soft">Research Value</span>
+          <h3>Why It Matters</h3>
+          <p>
+            The study connects technical behavior, misuse patterns, user safety, policy considerations,
+            and governance gaps. It demonstrates cybersecurity research, privacy risk analysis,
+            technical communication, and responsible technology thinking.
+          </p>
+          <div class="pill-row">
+            <span class="pill">IoT Misuse</span>
+            <span class="pill">Privacy Risk</span>
+            <span class="pill">Digital Safety</span>
+            <span class="pill">Governance</span>
+          </div>
+          <a class="btn-link" href="./Research Brief.pdf" target="_blank" rel="noopener">Download Research Brief</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>Skills Spotlight</span>
+        </div>
+        <p class="section-subtitle">
+          Practical skills aligned with data governance, data security, IAM/GRC, cloud governance, and compliance roles.
+        </p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>Data Governance</h4>
+          <p>Metadata, business glossary, ownership mapping, CDE support, lineage, and stewardship documentation.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">DAMA-DMBOK</span>
+            <span class="skill-tag">CDEs</span>
+            <span class="skill-tag">Lineage</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h4>Data Security</h4>
+          <p>Sensitive data classification, DLP, exposure review, remediation tracking, and secure handling.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">PII/PHI/PCI</span>
+            <span class="skill-tag">DSPM</span>
+            <span class="skill-tag">Remediation</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h4>IAM & Access Governance</h4>
+          <p>Access reviews, RBAC, least-privilege analysis, IAM/S3 permission review, and audit evidence support.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS IAM</span>
+            <span class="skill-tag">S3</span>
+            <span class="skill-tag">CloudTrail</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h4>Analytics & Reporting</h4>
+          <p>Power BI, SQL, Excel, dashboards, scorecards, compliance reporting, and executive-ready summaries.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Excel</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h4>Cloud & Data Platforms</h4>
+          <p>AWS, Azure, Snowflake, ADF, SQL Server, and project exposure to BigQuery/Dataflow.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Snowflake</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h4>Cybersecurity Research</h4>
+          <p>Privacy risk analysis, IoT misuse, digital safety, threat narratives, and responsible technology governance.</p>
+          <div class="skill-tags">
+            <span class="skill-tag">IoT</span>
+            <span class="skill-tag">Privacy</span>
+            <span class="skill-tag">Risk</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="dot"></span>
+          <span>Contact & Links</span>
+        </div>
+        <p class="section-subtitle">
+          Open to data governance, data security, IAM/GRC, and cloud governance opportunities.
+        </p>
+      </div>
+
+      <div class="grid-two">
+        <div class="contact-card">
+          <h3>Contact</h3>
+          <p>
+            Reach out for data governance, data security, IAM/GRC, cloud governance,
+            or cybersecurity research-related opportunities.
+          </p>
+
+          <div class="contact-row">
+            <span class="label">Email</span>
+            <span>amrutag.csa@gmail.com</span>
+          </div>
+
+          <div class="contact-row">
+            <span class="label">Location</span>
+            <span>Dallas, TX · Open to remote</span>
+          </div>
+
+          <div class="contact-links">
+            <a class="contact-pill" href="https://www.linkedin.com/in/amruta-s" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="contact-pill" href="https://github.com/amrutagyanam-sys" target="_blank" rel="noopener">GitHub</a>
+            <a class="contact-pill" href="./Amrutha_Gyanam_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+            <a class="contact-pill" href="#airtag">AirTag Academic Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Amrutha Gyanam · Data Governance & Data Security Portfolio
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
